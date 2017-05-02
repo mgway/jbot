@@ -1,0 +1,4 @@
+beautifulsoup4==4.3.2
+futures==2.2.0
+lxml==3.4.0
+psycopg2==2.7.1
