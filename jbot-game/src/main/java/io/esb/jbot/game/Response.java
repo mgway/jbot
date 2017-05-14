@@ -1,10 +1,7 @@
 package io.esb.jbot.game;
 
-import java.util.UUID;
-
 public class Response {
     private Player player;
-    private String text;
     private boolean correct;
     private double distance;
     private boolean exact;
@@ -17,13 +14,6 @@ public class Response {
         this.player = player;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public boolean isCorrect() {
         return correct;

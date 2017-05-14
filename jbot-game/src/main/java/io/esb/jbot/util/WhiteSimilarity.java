@@ -17,6 +17,11 @@ public class WhiteSimilarity {
         int intersection = 0;
         int union = pairs1.size() + pairs2.size();
 
+        // Handle the case where the strings are single letters
+        if (union == 0) {
+            return str1.equalsIgnoreCase(str2) ? 1.0 : 0.0;
+        }
+
         for (String pair1: pairs1) {
             for (int j = 0; j < pairs2.size(); j++) {
                 Object pair2 = pairs2.get(j);

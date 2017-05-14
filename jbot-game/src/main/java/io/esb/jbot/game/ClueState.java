@@ -12,22 +12,26 @@ public class ClueState implements Serializable {
 
     private UUID id;
     private String question;
-    private int position;
     private int value;
     private boolean dailyDouble;
-    private List<String> solutions;
+    private String[] solutions;
+    private String[] media;
     private Player winner;
 
-    public void checkResponse(Response response) {
+    public Response check(String provided) {
+        Response response = new Response();
+
         for (String solution: solutions) {
-            if (solution.equalsIgnoreCase(response.getText())) {
+            if (solution.equalsIgnoreCase(provided)) {
                 response.setExact(true);
                 break;
             }
-            if (response.setDistance(WhiteSimilarity.compareStrings(response.getText(), solution))) {
+            if (response.setDistance(WhiteSimilarity.compareStrings(provided, solution))) {
                 break;
             }
         }
+
+        return response;
     }
 
     public UUID getId() {
@@ -46,14 +50,6 @@ public class ClueState implements Serializable {
         this.question = question;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     public int getValue() {
         return value;
     }
@@ -70,12 +66,20 @@ public class ClueState implements Serializable {
         this.dailyDouble = dailyDouble;
     }
 
-    public List<String> getSolutions() {
+    public String[] getSolutions() {
         return solutions;
     }
 
-    public void setSolutions(List<String> solutions) {
+    public void setSolutions(String[] solutions) {
         this.solutions = solutions;
+    }
+
+    public String[] getMedia() {
+        return media;
+    }
+
+    public void setMedia(String[] media) {
+        this.media = media;
     }
 
     public Player getWinner() {

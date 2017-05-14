@@ -1,13 +1,8 @@
 package io.esb.jbot.game;
 
-import info.debatty.java.stringsimilarity.JaroWinkler;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class GameState implements Serializable {
     private static final long serialVersionUID = -202179678086026193L;
@@ -15,34 +10,56 @@ public class GameState implements Serializable {
     private UUID id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private String team;
-    private String channel;
+    private Channel channel;
+    private GameType gameType;
     private List<CategoryState> categories;
+    private Stack<ClueState> clues;
     private Map<String, PlayerState> players;
     private ClueState currentClue;
 
     public GameState() {
         this.players = new HashMap<>();
         this.startTime = LocalDateTime.now();
+        this.categories = new ArrayList<>();
+        this.clues = new Stack<>();
     }
 
-    public synchronized void attemptAnswer(Response response) {
+    public synchronized Response attemptAnswer(Player player, String answer) {
         if (currentClue != null) {
-            currentClue.checkResponse(response);
-            PlayerState player = players.computeIfAbsent(response.getPlayer().getUsername(), uid ->
+            Response response = currentClue.check(answer);
+            PlayerState playerState = players.computeIfAbsent(player.getUsername(), uid ->
                     new PlayerState(response.getPlayer())
             );
 
             if (response.isCorrect()) {
                 currentClue.setWinner(response.getPlayer());
-                player.correctAnswer(currentClue.getValue());
+                playerState.correctAnswer(currentClue.getValue());
                 currentClue = null;
             } else {
-                player.incorrectAnswer(currentClue.getValue());
+                playerState.incorrectAnswer(currentClue.getValue());
             }
+
+            return response;
         }
+
+        throw new IllegalStateException("There is no clue in progress");
     }
 
+    public synchronized ClueState next() {
+        if (currentClue != null) {
+            try {
+                currentClue = clues.pop();
+                return currentClue;
+            } catch (EmptyStackException ex) {
+                // Game is over
+                this.endTime = LocalDateTime.now();
+            }
+        }
+        throw new IllegalStateException("There is already a clue in progress");
+    }
+
+
+    public enum GameType { CLASSIC, REPLAY, RANDOM }
 
     public UUID getId() {
         return id;
@@ -68,20 +85,28 @@ public class GameState implements Serializable {
         this.endTime = endTime;
     }
 
-    public String getTeam() {
-        return team;
-    }
-
-    public void setTeam(String team) {
-        this.team = team;
-    }
-
-    public String getChannel() {
+    public Channel getChannel() {
         return channel;
     }
 
-    public void setChannel(String channel) {
+    public void setChannel(Channel channel) {
         this.channel = channel;
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(GameType gameType) {
+        this.gameType = gameType;
+    }
+
+    public Stack<ClueState> getClues() {
+        return clues;
+    }
+
+    public void setClues(Stack<ClueState> clues) {
+        this.clues = clues;
     }
 
     public List<CategoryState> getCategories() {
@@ -98,5 +123,13 @@ public class GameState implements Serializable {
 
     public void setCurrentClue(ClueState currentClue) {
         this.currentClue = currentClue;
+    }
+
+    public Map<String, PlayerState> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Map<String, PlayerState> players) {
+        this.players = players;
     }
 }
