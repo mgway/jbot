@@ -1,4 +1,4 @@
-package io.esb.jbot.game;
+package io.esb.jbot.dto.v1.game;
 
 public class PlayerState extends Player {
     private long score;

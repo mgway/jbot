@@ -1,10 +1,10 @@
 package io.esb.jbot.dao;
 
 
-import io.esb.jbot.game.CategoryState;
-import io.esb.jbot.game.ClueState;
-import io.esb.jbot.game.GameState;
-import io.esb.jbot.game.GameState.GameType;
+import io.esb.jbot.dto.v1.game.CategoryState;
+import io.esb.jbot.dto.v1.game.ClueState;
+import io.esb.jbot.dto.v1.game.GameState;
+import io.esb.jbot.dto.v1.game.GameState.GameType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -17,7 +17,7 @@ public class TestConfig {
 
     @Bean
     public DataSource dataSource() throws IOException {
-        final EmbeddedPostgres postgres = new EmbeddedPostgres(Version.V9_5_5);
+        final EmbeddedPostgres postgres = new EmbeddedPostgres(Version.V10_6);
         String url = postgres.start(EmbeddedPostgres.cachedRuntimeConfig(Paths.get("~/.embedpostgres/extract")));
 
         PGSimpleDataSource dataSource = new PGSimpleDataSource();

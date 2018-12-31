@@ -1,4 +1,4 @@
-package io.esb.jbot.archive;
+package io.esb.jbot.dto.v1.archive;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,7 +9,8 @@ public class Game implements Serializable {
     private static final long serialVersionUID = 1385489233263035703L;
 
     private UUID id;
-    private List<Category> category;
+    private int showNumber;
+    private List<Category> categories;
     private LocalDate aired;
 
     public UUID getId() {
@@ -18,14 +19,6 @@ public class Game implements Serializable {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public List<Category> getCategory() {
-        return category;
-    }
-
-    public void setCategory(List<Category> category) {
-        this.category = category;
     }
 
     public LocalDate getAired() {

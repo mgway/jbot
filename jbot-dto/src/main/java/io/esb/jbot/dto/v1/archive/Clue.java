@@ -1,4 +1,4 @@
-package io.esb.jbot.archive;
+package io.esb.jbot.dto.v1.archive;
 
 
 import java.io.Serializable;
@@ -9,11 +9,12 @@ public class Clue implements Serializable {
     private static final long serialVersionUID = 7467786038217045389L;
 
     private UUID id;
-    private String question;
+    private UUID categoryId;
+    private String prompt;
     private int position;
     private int value;
     private boolean dailyDouble;
-    private List<String> solutions;
+    private List<Solution> solutions;
 
     public UUID getId() {
         return id;
@@ -23,12 +24,20 @@ public class Clue implements Serializable {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public UUID getCategoryId() {
+        return categoryId;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setCategoryId(UUID categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
     }
 
     public int getPosition() {
@@ -55,11 +64,11 @@ public class Clue implements Serializable {
         this.dailyDouble = dailyDouble;
     }
 
-    public List<String> getSolutions() {
+    public List<Solution> getSolutions() {
         return solutions;
     }
 
-    public void setSolutions(List<String> solutions) {
+    public void setSolutions(List<Solution> solutions) {
         this.solutions = solutions;
     }
 }

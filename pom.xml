@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>2.1.1.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -19,7 +19,7 @@
     <description>Jeopardy! like question bot</description>
 
     <modules>
-        <module>jbot-game</module>
+        <module>jbot-dto</module>
         <module>jbot-slack</module>
         <module>jbot-worker</module>
     </modules>
@@ -30,11 +30,8 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <postgres.embedded.version>1.15</postgres.embedded.version>
-        <spring-cloud.version>Camden.RELEASE</spring-cloud.version>
-        <powermock.version>1.6.5</powermock.version>
-        <spring-cloud.version>Camden.RELEASE</spring-cloud.version>
-        <spring-cloud-aws.version>1.2.0.RELEASE</spring-cloud-aws.version>
+        <postgres.embedded.version>1.29</postgres.embedded.version>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -43,13 +40,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-aws</artifactId>
-                <version>${spring-cloud-aws.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

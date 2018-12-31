@@ -2,14 +2,11 @@ package io.esb.jbot.service;
 
 
 import io.esb.jbot.boot.Application;
-import io.esb.jbot.game.Channel;
-import io.esb.jbot.game.GameState;
-import io.esb.jbot.game.PlayerMessage;
-import io.esb.jbot.game.Provider;
+import io.esb.jbot.dto.v1.game.Channel;
+import io.esb.jbot.dto.v1.game.GameState;
+import io.esb.jbot.dto.v1.game.Provider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -25,9 +22,6 @@ public class EngineTests {
 
     @Autowired
     private Engine engine;
-
-    @Autowired
-    private AmqpTemplate template;
 
     @Test
     public void contextLoads() {

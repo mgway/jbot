@@ -1,11 +1,11 @@
 package io.esb.jbot.service;
 
-import io.esb.jbot.game.GameState.GameType;
-import io.esb.jbot.game.PlayerMessage;
+import io.esb.jbot.dto.v1.game.GameState.GameType;
+import io.esb.jbot.dto.v1.game.PlayerMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +16,7 @@ public class Listener {
     @Autowired
     private Engine engine;
 
-    @RabbitListener(queues = "${queue.game.name}")
+    @JmsListener(destination = "${queue.game.name}")
     public void gameQueueListener(PlayerMessage message) {
         switch (message.getType()) {
             case NEW_GAME:

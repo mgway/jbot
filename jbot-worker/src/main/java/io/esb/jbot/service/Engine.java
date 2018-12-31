@@ -2,7 +2,7 @@ package io.esb.jbot.service;
 
 
 import io.esb.jbot.dao.GameRepository;
-import io.esb.jbot.game.*;
+import io.esb.jbot.dto.v1.game.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

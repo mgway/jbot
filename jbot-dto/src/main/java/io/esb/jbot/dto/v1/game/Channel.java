@@ -1,4 +1,4 @@
-package io.esb.jbot.game;
+package io.esb.jbot.dto.v1.game;
 
 import java.io.Serializable;
 import java.util.Objects;

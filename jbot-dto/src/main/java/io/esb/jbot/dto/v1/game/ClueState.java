@@ -1,9 +1,8 @@
-package io.esb.jbot.game;
+package io.esb.jbot.dto.v1.game;
 
 import io.esb.jbot.util.WhiteSimilarity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.UUID;
 
 
